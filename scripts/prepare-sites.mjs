@@ -5,6 +5,7 @@ const root = resolve(import.meta.dirname, '..');
 const dist = resolve(root, 'dist');
 
 await mkdir(resolve(dist, 'server'), { recursive: true });
+await mkdir(resolve(dist, 'client'), { recursive: true });
 await mkdir(resolve(dist, '.openai'), { recursive: true });
 
 const worker = `export default {
@@ -22,4 +23,6 @@ const worker = `export default {
 `;
 
 await writeFile(resolve(dist, 'server', 'index.js'), worker, 'utf8');
+await cp(resolve(dist, 'index.html'), resolve(dist, 'client', 'index.html'));
+await cp(resolve(dist, 'assets'), resolve(dist, 'client', 'assets'), { recursive: true });
 await cp(resolve(root, '.openai', 'hosting.json'), resolve(dist, '.openai', 'hosting.json'));
