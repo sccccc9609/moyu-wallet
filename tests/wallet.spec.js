@@ -11,6 +11,10 @@ test('实时工资会增长，设置会保存', async ({ page }) => {
 
   await page.locator('#openSettings').click();
   await expect(page.locator('#settingsDialog')).toBeVisible();
+  await expect(page.locator('#startInput')).toHaveValue('08:00');
+  await expect(page.locator('#endInput')).toHaveValue('12:00');
+  await expect(page.locator('#afternoonStartInput')).toHaveValue('13:30');
+  await expect(page.locator('#afternoonEndInput')).toHaveValue('17:30');
   await page.locator('#salaryInput').fill('18000');
   await page.locator('.save-button').click();
   await expect(page.locator('#settingsDialog')).not.toBeVisible();
