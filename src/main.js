@@ -11,11 +11,12 @@ const THEME_KEY = 'moyu-wallet-skin-v1';
 const QUEST_KEY = 'moyu-wallet-quests-v1';
 const COPY_KEY = 'moyu-wallet-copy-v1';
 const HALF_HOUR_MS = 30 * 60 * 1000;
+const SCHEDULE_VERSION = 2;
 const defaults = {
   salary: 10000,
   startTime: '08:00', endTime: '12:00',
-  afternoonStartTime: '14:00', afternoonEndTime: '18:00',
-  payday: 10, workdays: [1, 2, 3, 4, 5]
+  afternoonStartTime: '13:30', afternoonEndTime: '17:30',
+  payday: 10, workdays: [1, 2, 3, 4, 5], scheduleVersion: SCHEDULE_VERSION
 };
 const skins = {
   monthly: { name: '月薪喵', personality: '打工打到捂脸', image: monthlyCat },
@@ -136,10 +137,21 @@ function loadSettings() {
       if (!saved.afternoonStartTime && timeToMinutes(saved.endTime || '18:00') > 14 * 60) {
         return {
           ...defaults, ...saved,
-          endTime: '12:00', afternoonStartTime: '14:00', afternoonEndTime: saved.endTime
+          endTime: '12:00', afternoonStartTime: '13:30', afternoonEndTime: saved.endTime,
+          scheduleVersion: SCHEDULE_VERSION
         };
       }
-      return { ...defaults, ...saved };
+      const usedPreviousDefaults = !saved.scheduleVersion
+        && saved.startTime === '08:00'
+        && saved.endTime === '12:00'
+        && saved.afternoonStartTime === '14:00'
+        && saved.afternoonEndTime === '18:00';
+      return {
+        ...defaults,
+        ...saved,
+        ...(usedPreviousDefaults ? { afternoonStartTime: '13:30', afternoonEndTime: '17:30' } : {}),
+        scheduleVersion: SCHEDULE_VERSION
+      };
     }
   } catch (_) { /* 使用默认设置 */ }
   return { ...defaults };
@@ -416,7 +428,7 @@ elements.form.addEventListener('submit', (event) => {
   }
   settings = {
     salary: Number(elements.salaryInput.value), startTime, endTime, afternoonStartTime, afternoonEndTime,
-    payday: clamp(Number(elements.paydayInput.value), 1, 31), workdays
+    payday: clamp(Number(elements.paydayInput.value), 1, 31), workdays, scheduleVersion: SCHEDULE_VERSION
   };
   const copyMode = document.querySelector('input[name="copyMode"]:checked')?.value === 'fixed' ? 'fixed' : 'random';
   const fixedIndex = Number(elements.fixedCopySelect.value) || 0;
