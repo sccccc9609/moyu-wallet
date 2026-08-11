@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#fff8e8" />
+    <meta name="description" content="一款可爱的打工人实时工资计算器" />
+    <title>摸鱼钱包 · 打工也要数钱</title>
+  </head>
+  <body>
+    <div class="sky-decor cloud cloud-one"></div>
+    <div class="sky-decor cloud cloud-two"></div>
+    <div class="sky-decor star star-one">✦</div>
+    <div class="sky-decor star star-two">✿</div>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="摸鱼钱包首页">
+          <span class="brand-mark" aria-hidden="true">¥</span>
+          <span class="brand-copy"><span id="brandName">月薪喵</span><small id="copyModeBadge">半小时随机</small></span>
+        </a>
+        <div class="topbar-actions">
+          <button class="skin-trigger" id="openSkins" type="button"><span aria-hidden="true">🎨</span><span id="skinName">月薪喵</span></button>
+          <div class="date-pill">
+            <span aria-hidden="true">☀️</span>
+            <span id="todayLabel">今天也要开心赚钱</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero-grid">
+        <div class="intro-block">
+          <p class="eyebrow"><span></span> <b id="brandKicker">月薪喵陪你带薪长大</b></p>
+          <h1 id="brandHeadline">今天也在<br />一边摸鱼，一边<span>发财</span></h1>
+          <p class="intro-copy" id="brandDescription">别小看工位上的每一秒，月薪喵都帮你换成小钱钱啦。</p>
+
+          <div class="mascot-scene">
+            <div class="pet-speech" aria-live="polite">
+              <span class="speech-name" id="speechName">月薪喵说</span>
+              <strong id="petSpeech">今天也在带薪成长，真不错！</strong>
+            </div>
+            <div class="coin coin-a" aria-hidden="true">¥</div>
+            <div class="coin coin-b" aria-hidden="true">¥</div>
+            <div class="spark spark-a" aria-hidden="true">✦</div>
+            <div class="spark spark-b" aria-hidden="true">✦</div>
+            <div class="mascot-frame" aria-label="当前陪伴宠物">
+              <img id="petImage" src="/src/assets/pets/monthly-cat.png" alt="月薪喵宠物形象" />
+            </div>
+          </div>
+        </div>
+
+        <section class="wallet-card" aria-label="实时工资">
+          <div class="status-row">
+            <div class="status-chip"><i></i><span id="workStatus">正在确认上班状态</span></div>
+            <button class="settings-button" id="openSettings" type="button" aria-label="打开工资设置">
+              <span>设置</span><span aria-hidden="true">⚙</span>
+            </button>
+          </div>
+
+          <div class="earnings-main">
+            <p>今天已经赚到</p>
+            <div class="money-line"><span>¥</span><strong id="todayMoney">0.00</strong></div>
+            <div class="per-second">每秒入账 <b id="secondRate">¥0.0000</b></div>
+          </div>
+
+          <div class="progress-wrap">
+            <div class="progress-label"><span>今日搬砖进度</span><b id="todayPercent">0%</b></div>
+            <div class="progress-track"><div id="todayProgress" class="progress-fill"><span></span></div></div>
+            <div class="time-label"><span id="startTimeLabel">09:00 上班</span><span id="endTimeLabel">18:00 下班</span></div>
+          </div>
+
+          <div class="mini-cards">
+            <article class="mini-card month-card">
+              <div class="mini-icon">💰</div>
+              <div><p>本周期已赚</p><strong id="monthMoney">¥0.00</strong></div>
+            </article>
+            <article class="mini-card countdown-card">
+              <div class="mini-icon">🎉</div>
+              <div><p>距离发薪日</p><strong id="paydayCountdown">-- 天</strong></div>
+            </article>
+          </div>
+
+          <div class="encourage"><span>“</span><p id="encourageText">认真生活的人，钱包也会认真长大！</p><span>”</span></div>
+        </section>
+      </section>
+
+      <section class="stats-strip" aria-label="工资数据摘要">
+        <div><span>⏱</span><p>今日有效工时<strong id="workedTime">0 小时 0 分</strong></p></div>
+        <div><span>☕</span><p>距离下班还有<strong id="offworkCountdown">--</strong></p></div>
+        <div><span>🍓</span><p>本周期工作进度<strong id="monthPercent">0%</strong></p></div>
+      </section>
+
+      <section class="side-quest-section" aria-labelledby="sideQuestTitle">
+        <div class="quest-head">
+          <div>
+            <p class="section-kicker">带薪做自己</p>
+            <h2 id="sideQuestTitle">今日私活</h2>
+            <p>把想在摸鱼时间完成的小事记下来，做完一件就给自己一朵小红花。</p>
+          </div>
+          <div class="quest-score"><span id="questDone">0</span><i>/</i><b id="questTotal">0</b><small>今日完成</small></div>
+        </div>
+        <form class="quest-form" id="questForm">
+          <label for="questInput">今天想悄悄完成什么？</label>
+          <div><input id="questInput" type="text" maxlength="60" placeholder="例如：读 20 页书、更新作品集……" autocomplete="off" /><button type="submit">加入私活 <span>＋</span></button></div>
+        </form>
+        <div class="quest-progress"><span id="questProgress"></span></div>
+        <ul class="quest-list" id="questList"></ul>
+        <div class="quest-empty" id="questEmpty"><span>📝</span><p>今天还没有私活，给自己安排一点小成长吧</p></div>
+      </section>
+    </main>
+
+    <dialog id="skinDialog" class="settings-dialog skin-dialog">
+      <div class="skin-dialog-inner">
+        <div class="dialog-head">
+          <div><p>今天想和谁一起摸鱼？</p><h2>选择宠物皮肤</h2></div>
+          <button id="closeSkins" class="close-button" aria-label="关闭" type="button">×</button>
+        </div>
+        <div class="skin-grid">
+          <button class="skin-option" data-skin="monthly" type="button">
+            <img class="skin-preview" src="/src/assets/pets/monthly-cat.png" alt="月薪喵" /><strong>月薪喵</strong><small>打工打到捂脸</small><i>默认推荐</i>
+          </button>
+          <button class="skin-option" data-skin="calico" type="button">
+            <img class="skin-preview" src="/src/assets/pets/calico-cat.png" alt="元气三花" /><strong>元气三花</strong><small>今天也超有干劲</small><i>元气主题</i>
+          </button>
+          <button class="skin-option" data-skin="blue" type="button">
+            <img class="skin-preview" src="/src/assets/pets/blue-cat.png" alt="蓝莓哭哭" /><strong>蓝莓哭哭</strong><small>委屈但工资照拿</small><i>蓝色主题</i>
+          </button>
+          <button class="skin-option" data-skin="star" type="button">
+            <img class="skin-preview" src="/src/assets/pets/star-cat.png" alt="星星眼灰猫" /><strong>星星眼灰猫</strong><small>眼里只有下班</small><i>灰调主题</i>
+          </button>
+          <button class="skin-option" data-skin="bigeye" type="button">
+            <img class="skin-preview" src="/src/assets/pets/bigeye-cat.png" alt="大眼豆豆" /><strong>大眼豆豆</strong><small>安静观察工资</small><i>复古主题</i>
+          </button>
+          <button class="skin-option" data-skin="cream" type="button">
+            <img class="skin-preview" src="/src/assets/pets/cream-cat.png" alt="奶油团子" /><strong>奶油团子</strong><small>软乎乎地等下班</small><i>奶油主题</i>
+          </button>
+        </div>
+        <p class="privacy-note">皮肤会自动记住，下次打开还是你的老搭档</p>
+      </div>
+    </dialog>
+
+    <dialog id="settingsDialog" class="settings-dialog">
+      <form id="settingsForm" method="dialog">
+        <div class="dialog-head">
+          <div><p>定制你的小金库</p><h2>工资设置</h2></div>
+          <button id="closeSettings" class="close-button" value="cancel" aria-label="关闭" type="button">×</button>
+        </div>
+
+        <label class="field salary-field">
+          <span>月薪（税前）</span>
+          <div class="input-with-prefix"><b>¥</b><input id="salaryInput" name="salary" type="number" min="0" step="100" inputmode="decimal" required /></div>
+        </label>
+
+        <fieldset class="copy-mode-field">
+          <legend>页面文案主题</legend>
+          <div class="copy-mode-options">
+            <label><input type="radio" name="copyMode" value="random" /><span>🎲 每半小时随机</span></label>
+            <label><input type="radio" name="copyMode" value="fixed" /><span>📌 固定一个主题</span></label>
+          </div>
+          <label class="fixed-copy-picker" for="fixedCopySelect"><span>选择固定主题</span><select id="fixedCopySelect"></select></label>
+        </fieldset>
+
+        <div class="schedule-title"><span>每日上班时段</span><small>午休时间不会累计工资</small></div>
+        <div class="form-row schedule-row">
+          <label class="field"><span>上午上班</span><input id="startInput" name="startTime" type="time" required /></label>
+          <label class="field"><span>上午下班</span><input id="endInput" name="endTime" type="time" required /></label>
+          <label class="field"><span>下午上班</span><input id="afternoonStartInput" name="afternoonStartTime" type="time" required /></label>
+          <label class="field"><span>下午下班</span><input id="afternoonEndInput" name="afternoonEndTime" type="time" required /></label>
+        </div>
+
+        <label class="field">
+          <span>每月发薪日</span>
+          <div class="input-with-suffix"><input id="paydayInput" name="payday" type="number" min="1" max="31" required /><b>日</b></div>
+          <small>若当月没有该日期，将按当月最后一天计算</small>
+        </label>
+
+        <fieldset class="workdays-field">
+          <legend>每周工作日</legend>
+          <div class="day-pills" id="workdayPills">
+            <label><input type="checkbox" value="1" /><span>一</span></label>
+            <label><input type="checkbox" value="2" /><span>二</span></label>
+            <label><input type="checkbox" value="3" /><span>三</span></label>
+            <label><input type="checkbox" value="4" /><span>四</span></label>
+            <label><input type="checkbox" value="5" /><span>五</span></label>
+            <label><input type="checkbox" value="6" /><span>六</span></label>
+            <label><input type="checkbox" value="0" /><span>日</span></label>
+          </div>
+        </fieldset>
+
+        <p class="form-error" id="formError" role="alert"></p>
+        <button class="save-button" value="default" type="submit">保存，开始数钱 <span>→</span></button>
+        <p class="privacy-note">🔒 所有数据仅保存在你的浏览器里</p>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

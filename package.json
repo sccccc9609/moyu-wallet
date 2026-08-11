@@ -1,0 +1,14 @@
+{
+  "name": "moyu-wallet",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build && node scripts/prepare-sites.mjs",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "vite": "^7.1.1"
+  }
+}
