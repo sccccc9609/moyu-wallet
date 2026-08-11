@@ -1,0 +1,9 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+*-preview.png
+public/assets/mascot-strip-chroma.png
+public/assets/mascot-strip.png
+src/assets/mascot-strip.png
+*.log
